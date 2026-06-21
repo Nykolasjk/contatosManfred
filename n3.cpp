@@ -97,6 +97,8 @@ void limpar (){
 
 void incluirContato() {
 	
+	printf("\n=========== ADICIONAR CONTATOS ===========\n");
+	
 	printf("\nNome: ");
 	scanf(" %[^\n]", agenda[totalContatos].nome); // usei o " %[^\n]" pra poder ler tudo que for digitado, até clicar no "Enter". se fosse com o "%c" ele iria pegar apenas a primeira letra ou palavra antes do espaço. ex "oi, tudo bem" sairia apenas "oi,"
 
@@ -119,11 +121,11 @@ void incluirContato() {
 
 void listarContatos() {
 
-    if(totalContatos == 0) {
-        printf("\nNenhum contato cadastrado.\n");
-    }
-
     printf("\n=========== CONTATOS ===========\n");
+    
+     if(totalContatos == 0) {
+        printf("\nNenhum contato cadastrado.\n"); //fazer uma funcao pra isso? 
+    }
 
     for(int i = 0; i < totalContatos; i++) {
 
@@ -142,6 +144,11 @@ void buscarContato(){
     int encontrado = 0;
 
 	printf("\n============== BUSCA DE CONTATOS ==============\n");
+	
+	 if(totalContatos == 0) {
+        printf("\nNenhum contato cadastrado.\n");
+        return;
+    }
 
     printf("\nDigite aqui o nome que deseja buscar: ");
     scanf(" %[^\n]", nome);
@@ -173,6 +180,11 @@ void excluirContato(){
     int encontrado = 0;
     
     printf("\n============== EXCLUSAO DE CONTATOS ==============\n");
+    
+     if(totalContatos == 0) {
+        printf("\nNenhum contato cadastrado.\n");
+        return;
+    }
 	
 	 printf("\nDigite aqui o nome do contato que deseja excluir: ");
 	 scanf(" %[^\n]", nome);
