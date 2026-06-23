@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 
 #define maxContatos 1024
 
@@ -42,7 +41,12 @@ int main(void){
 		printf("[4] - Excluir contato\n");
 		printf("[5] - Sair\n");
 		printf("Digite um numero de 1 a 5: ");
-		scanf("%i", &n);
+		
+   		if(scanf("%i", &n) != 1){
+    		n = 0;
+    		scanf("%*[^\n]");
+		}
+		
 		limpar();
 		
 		switch(n){
@@ -150,8 +154,8 @@ void buscarContato(){
         return;
     }
 
-    printf("\nDigite aqui o nome que deseja buscar: ");
-    scanf(" %[^\n]", nome);
+	 listarContatos();
+    scanf(" %[^\n]", nome);                            
 
     for(int i = 0; i < totalContatos; i++) // faz o laço pra percorrer todos os contatos disponiveis
     {
@@ -184,17 +188,21 @@ void excluirContato(){
      if(totalContatos == 0) {
         printf("\nNenhum contato cadastrado.\n");
         return;
+        
     }
 	
+		listarContatos();
+	
 	 printf("\nDigite aqui o nome do contato que deseja excluir: ");
-	 scanf(" %[^\n]", nome);
+	 scanf(" %[^\n]", nome);                                        
+	 listarContatos();
 	
 	for(int i = 0; i < totalContatos; i++)
     {
         if(strcmp(nome, agenda[i].nome) == 0) {
            
            for(int j = i; j < totalContatos - 1; j++)
-            {
+            { 
                 agenda[j] = agenda[j + 1]; // troca a posição na agenda ao excluir o contato. se o 1ª contato for excluido, o 2ª pega sua posição, como se fosse uma esteira movendo pra esquerda os produtos
             }
 
