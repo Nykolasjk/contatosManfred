@@ -23,9 +23,9 @@ int totalContatos = 0;
 void limpar();
 void incluirContato();
 int contatoExiste(char nome[]);
-void alterarContato();
 void listarContatos();
 void buscarContato();
+void alterarContato();
 void excluirContato();
 
 int main(void){
@@ -36,14 +36,15 @@ int main(void){
 		
 		printf("\n==================================");
         printf("\n      AGENDA DE CONTATOS");
-        printf("\n==================================");
+        printf("\n==================================\n");
 		printf("\n[1] - Incluir contato\n");
 		printf("[2] - Listar contatos\n");
-		printf("[3] - Buscar contato pelo nome\n");
+		printf("[3] - Buscar contato\n");
 		printf("[4] - Alterar contato\n");
 		printf("[5] - Excluir contato\n");
 		printf("[6] - Sair\n");
-		printf("Digite um numero de 1 a 5: ");
+		printf("\n----------------------------------\n");
+		printf("\nDigite um numero de 1 a 6: ");
 		
    		if(scanf("%i", &n) != 1){
     		n = 0;
@@ -54,40 +55,22 @@ int main(void){
 		
 		switch(n){
 		
-			case 1:
-				incluirContato();
-			break;
+			case 1: incluirContato(); break;
 		
-			case 2:
-				listarContatos();
-			break;
+			case 2: listarContatos(); break;
 		
-			case 3:
-				buscarContato();
-			break;
+			case 3: buscarContato(); break;
 		
-			case 4:
-				alterarContato();
-			break;
+			case 4: alterarContato(); break;
 			
-			case 5:
-				excluirContato();
-			break;
+			case 5: excluirContato(); break;
 			
-			case 6:
-				printf("Obrigado por utilizar nosso programa, volte sempre!\nPrograma criado por Carla Canalle Mundel e Nykolas Jose Kopp.");
-			break;
+			case 6: printf("Obrigado por utilizar nosso programa, volte sempre!\nPrograma criado por Carla Canalle Mundel e Nykolas Jose Kopp."); break;
 			
-			default:
-				printf("Valor invalido, tente novamente.");
-			break;
-			
+			default: printf("\n[VALOR INVALIDO, TENTE NOVAMENTE.]\n"); break;
 		}
-	
 		
 	}while(n != 6);
-	
-	
 	
 	return 0;
 }
@@ -136,7 +119,6 @@ void incluirContato(){
     printf("\nContato cadastrado com sucesso!\n");
 }
 
-
 int contatoExiste(char nome[]){
 	
 	for(int i = 0; i < totalContatos; i++){
@@ -147,26 +129,41 @@ int contatoExiste(char nome[]){
 	return 0;	
 }
 
-
-
 void listarContatos(){
-
-    printf("\n=========== CONTATOS ===========\n");
-    
-     if(totalContatos == 0){
-        printf("\nNenhum contato cadastrado para listar.\n");
+	
+	printf("\n=========== CONTATOS ===========\n");
+	
+    if(totalContatos == 0){
+    	printf("\nNenhum contato cadastrado.\n");
     }
 
+    // cópia temporária para não bagunçar a ordem original
+    Contato temp[maxContatos];
     for(int i = 0; i < totalContatos; i++){
-
+        temp[i] = agenda[i];
+    }
+    
+    // bubble sort
+    for(int i = 0; i < totalContatos - 1; i++){
+        for(int j = 0; j < totalContatos - i - 1; j++){
+            if(strcmp(temp[j].nome, temp[j+1].nome) > 0){
+                Contato aux = temp[j];
+                temp[j] = temp[j+1];
+                temp[j+1] = aux;
+            }
+        }
+    }
+    
+    for(int i = 0; i < totalContatos; i++){
         printf("\nContato %i", i + 1);
-        printf("\nNome: %s", agenda[i].nome);
-        printf("\nTelefone: %s", agenda[i].telefone);
-        printf("\nEmail: %s", agenda[i].email);
-        printf("\nCidade: %s", agenda[i].cidade);
-        printf("\nEmpresa: %s", agenda[i].empresa);
+        printf("\nNome: %s", temp[i].nome);
+        printf("\nTelefone: %s", temp[i].telefone);
+        printf("\nEmail: %s", temp[i].email);
+        printf("\nCidade: %s", temp[i].cidade);
+        printf("\nEmpresa: %s", temp[i].empresa);
         printf("\n----------------------------");
     }
+    printf("\n");
 }
 
 void buscarContato(){
@@ -175,22 +172,19 @@ void buscarContato(){
 
 	printf("\n============== BUSCA DE CONTATOS ==============\n");
 	
-	 if(totalContatos == 0){
-        printf("\nNenhum contato cadastrado para busca.\n");
+	if(totalContatos == 0){
+    	printf("\nNenhum contato cadastrado para busca.\n");
         return;
     }
 
-	listarContatos();
-	printf("\nDigite o contato que deseja buscar: ");
+	//listarContatos();
+	printf("\nPara acessar um contato, digite o nome que deseja buscar: ");
     scanf(" %[^\n]", nome);                            
 
     for(int i = 0; i < totalContatos; i++){ // faz o laço pra percorrer todos os contatos disponiveis
-    
-        if(strcmp(nome, agenda[i].nome) == 0){ // usei o strcmp pra comparar as strings, ele avalia caracter por caracter e ai valida. 
-        										//strcmp valida assim: se for 0, quer dizer que é igual ao contato que esta armazenado, se for diferente da erro
-        										// ele esta comparando o nome digitado na busca com os nomes na posição "i" da agenda
-        
-            printf("\nNome: %s", agenda[i].nome);
+    	if(strstr(agenda[i].nome, nome) != NULL){ /* usei o strstr pra comparar as strings, ele avalia caracter por caracter e ai valida. strcmp valida assim: se for 0, quer dizer que é igual ao contato que esta armazenado, se for diferente da erro ele esta comparando o nome digitado na busca com os nomes na posição "i" da agenda.*/
+         	printf("\n============== CONTATO ENCONTRADO ==============\n");
+			printf("\nNome: %s", agenda[i].nome);
             printf("\nTelefone: %s", agenda[i].telefone);
             printf("\nEmail: %s", agenda[i].email);
             printf("\nCidade: %s", agenda[i].cidade);
@@ -227,8 +221,16 @@ void alterarContato(){
 
             printf("\n---- Digite os novos dados ----\n");
 
+            char novoNome[60];
             printf("Nome: ");
-            scanf(" %[^\n]", agenda[i].nome);
+            scanf(" %[^\n]", novoNome);
+
+            if(strcmp(novoNome, agenda[i].nome) != 0 && contatoExiste(novoNome)){ // a primeira condicao verifica se é o mesmo nome atual, se for, ta de boa, pode ser. a segunda olha se ja tem outro contato com esse novo nome. o && obriga que as duas sejam verdadeiras.
+                printf("\nJa existe um contato com esse nome!\n");
+                return;
+            }
+
+            strcpy(agenda[i].nome, novoNome);
 
             printf("Telefone: ");
             scanf(" %[^\n]", agenda[i].telefone);
@@ -245,7 +247,7 @@ void alterarContato(){
             printf("\nContato alterado com sucesso!\n");
 
             encontrado = 1;
-            break;
+            //break;
         }
     }
 
