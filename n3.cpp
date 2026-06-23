@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define maxContatos 1024
+#define maxContatos 100
 
 	// significado typedef: a palavra que avisa o computador que vamos criar um apelido.
 	// significado struct: a palavra que agrupa as informações.
@@ -17,11 +17,12 @@
     
 } Contato;
 
-Contato agenda[maxContatos];
+Contato agenda[maxContatos]; 
 int totalContatos = 0;
 
 void limpar();
 void incluirContato();
+// void contatoExiste(char nome[]);
 void listarContatos();
 void buscarContato();
 void excluirContato();
@@ -32,9 +33,9 @@ int main(void){
 	
 	do{
 		
-		printf("\n====================================");
+		printf("\n==================================");
         printf("\n      AGENDA DE CONTATOS");
-        printf("\n====================================");
+        printf("\n==================================");
 		printf("\n[1] - Incluir contato\n");
 		printf("[2] - Listar contatos\n");
 		printf("[3] - Buscar contato pelo nome\n");
@@ -133,7 +134,7 @@ void listarContatos() {
 
     for(int i = 0; i < totalContatos; i++) {
 
-        printf("\nContato %d", i + 1);
+        printf("\nContato %i", i + 1);
         printf("\nNome: %s", agenda[i].nome);
         printf("\nTelefone: %s", agenda[i].telefone);
         printf("\nEmail: %s", agenda[i].email);
