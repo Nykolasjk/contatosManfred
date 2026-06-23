@@ -145,7 +145,7 @@ void listarContatos(){
     
     // bubble sort
     for(int i = 0; i < totalContatos - 1; i++){
-        for(int j = 0; j < totalContatos - i - 1; j++){
+        for(int j = 0; j < totalContatos - 1; j++){
             if(strcmp(temp[j].nome, temp[j+1].nome) > 0){
                 Contato aux = temp[j];
                 temp[j] = temp[j+1];
@@ -247,7 +247,7 @@ void alterarContato(){
             printf("\nContato alterado com sucesso!\n");
 
             encontrado = 1;
-            //break;
+            break;
         }
     }
 
