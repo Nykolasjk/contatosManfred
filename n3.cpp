@@ -51,23 +51,21 @@ int main(void){
     		fflush(stdin);
 		}
 		
-		limpar();
-		
 		switch(n){
 		
-			case 1: incluirContato(); break;
+			case 1: limpar(); incluirContato(); break;
 		
-			case 2: listarContatos(); break;
+			case 2: limpar(); listarContatos(); break;
 		
-			case 3: buscarContato(); break;
+			case 3: limpar(); buscarContato(); break;
 		
-			case 4: alterarContato(); break;
+			case 4: limpar(); alterarContato(); break;
 			
-			case 5: excluirContato(); break;
+			case 5: limpar(); excluirContato(); break;
 			
-			case 6: printf("Obrigado por utilizar nosso programa, volte sempre!\nPrograma criado por Carla Canalle Mundel e Nykolas Jose Kopp."); break;
+			case 6: printf("\nObrigado por utilizar nosso programa, volte sempre!\nPrograma criado por Carla Canalle Mundel e Nykolas Jose Kopp.\n"); break;
 			
-			default: printf("\n[VALOR INVALIDO, TENTE NOVAMENTE.]\n"); break;
+			default: limpar(); printf("\n[VALOR INVALIDO, TENTE NOVAMENTE.]\n"); break;
 		}
 		
 	}while(n != 6);
@@ -287,7 +285,6 @@ void excluirContato(){
             
         }
     }
-    
     
     if(!encontrado){
         printf("\nContato nao encontrado.\n");
