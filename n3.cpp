@@ -63,7 +63,7 @@ int main(void){
 			
 			case 5: limpar(); excluirContato(); break;
 			
-			case 6: printf("\nObrigado por utilizar nosso programa, volte sempre!\nPrograma criado por Carla Canalle Mundel e Nykolas Jose Kopp.\n"); break;
+			case 6: printf("\nObrigado por utilizar nosso programa, volte sempre!\nPrograma criado por Carla Canalle Mundel e Nykolas Jose Kopp.\n");  system("pause"); break;
 			
 			default: limpar(); printf("\n[VALOR INVALIDO, TENTE NOVAMENTE.]\n"); break;
 		}
@@ -133,6 +133,7 @@ void listarContatos(){
 	
     if(totalContatos == 0){
     	printf("\nNenhum contato cadastrado.\n");
+    	return;
     }
 
     // cópia temporária para não bagunçar a ordem original
